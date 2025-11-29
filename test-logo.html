@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Logo</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            font-family: Arial;
+            padding: 50px;
+        }
+        img {
+            border: 2px solid cyan;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test du Logo</h1>
+    
+    <h2>Méthode 1: Chemin absolu depuis public/</h2>
+    <img src="/logo.png" width="100" height="100" alt="Logo méthode 1">
+    
+    <h2>Méthode 2: Chemin relatif</h2>
+    <img src="./logo.png" width="100" height="100" alt="Logo méthode 2">
+    
+    <h2>Méthode 3: Nom complet</h2>
+    <img src="logo.png" width="100" height="100" alt="Logo méthode 3">
+    
+    <script>
+        // Tester si les images se chargent
+        document.querySelectorAll('img').forEach((img, index) => {
+            img.onload = () => console.log(`Image ${index + 1} chargée avec succès!`);
+            img.onerror = () => console.error(`Image ${index + 1} ERREUR de chargement!`);
+        });
+        
+        // Tester l'accès direct au fichier
+        fetch('/logo.png')
+            .then(response => {
+                console.log('Fetch status:', response.status);
+                if (response.ok) {
+                    console.log('✅ Le fichier logo.png est accessible!');
+                } else {
+                    console.error('❌ Le fichier logo.png n\'est PAS accessible!');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Erreur fetch:', error);
+            });
+    </script>
+</body>
+</html>
